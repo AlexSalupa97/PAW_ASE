@@ -40,7 +40,7 @@ namespace Human_Resources
                 listaD.Add(d);
             }
 
-            listaE.Add(new Employee());
+           // listaE.Add(new Employee());
             BindingList<Employee> l = new BindingList<Employee>(listaE);
             dataGridView1.DataSource = l;
 
@@ -253,10 +253,26 @@ namespace Human_Resources
                     {
                         
                     }
-                }
+                } 
 
-            
+        }
+        
+        private void chartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form3 f3 = new Form3();
 
+            List<int> count = new List<int>();
+            for (int i = 0; i < listaD.Count; i++)
+                count.Add(0);
+
+            foreach (Employee emp in listaE)
+                count[emp.IdDepartment-1]++;
+
+
+            foreach (Department d in listaD)
+                f3.chart1.Series["Nr. ang"].Points.AddXY(d.Name, count[d.Id - 1]);
+
+            f3.Show();
         }
     }
 }
